@@ -1366,10 +1366,10 @@
 
       if (state === 'flying' && ball) {
         flightTime += STEP;
-        stillFrames = ball.speed < 0.25 ? stillFrames + 1 : 0;
+        stillFrames = ball.speed < 1.2 ? stillFrames + 1 : 0;
         const p = ball.position;
         const gone = p.x > W + 150 || p.x < -150 || p.y > H + 100;
-        if (gone || (stillFrames > 50 && flightTime > 800) || flightTime > 9000) {
+        if (gone || (stillFrames > 20 && flightTime > 600) || flightTime > 5000) {
           if (!gone && !detonate()) endShot();
           if (gone) endShot();
         }
@@ -1382,7 +1382,7 @@
       } else if (state === 'settling') {
         settleTimer += STEP;
         if (winTimer < 0) {
-          if (ammoLeft() > 0 && settleTimer > 500) {
+          if (ammoLeft() > 0 && settleTimer > 250) {
             state = 'ready';
             loadAnim = 0;
           } else if (ammoLeft() === 0 && settleTimer > 1500) {
